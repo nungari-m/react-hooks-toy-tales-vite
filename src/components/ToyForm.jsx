@@ -1,4 +1,28 @@
 import React from "react";
+import React, { useState } from "react";
+
+function ToyForm({ onAddToy }) {
+  const [formData, setFormData] = useState({ name: "", image: "" });
+}
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    fetch("http://localhost:3001/toys", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...formData, likes: 0 }),
+    })
+      .then((r) => r.json())
+      .then((newToy) => {
+        onAddToy(newToy);
+        setFormData({ name: "", image: "" });
+      });
+  }
 
 function ToyForm() {
   return (

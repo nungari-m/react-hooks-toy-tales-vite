@@ -15,3 +15,5 @@ function ToyContainer({ toys, onDeleteToy, onUpdateToy }) {
     </div>
   );
 }
+
+export default ToyContainer;
